@@ -34,6 +34,18 @@ public class ArticleAdapter extends ArrayAdapter<Article> {
         titleTextView.setText(currentArticle.getTitle());
         descTextView.setText(currentArticle.getDescription());
         timeTextView.setText(currentArticle.getTime());
+        titleTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO: Change the Activity.
+            }
+        });
+        descTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO: Change the Activity.
+            }
+        });
         return listItemView;
     }
 }
