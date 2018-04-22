@@ -40,10 +40,10 @@ public class ArticleAdapter extends ArrayAdapter<Article> {
         titleTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(),FullStory.class);
+                Intent intent = new Intent(getContext(),FullStory.class);
                 String link = currentArticle.getArticleLink();
                 intent.putExtra("link",link);
-                startActivity(intent);
+                getContext().startActivity(intent);
             }
         });
         return listItemView;
