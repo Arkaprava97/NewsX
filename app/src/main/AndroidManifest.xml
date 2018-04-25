@@ -19,7 +19,8 @@
         </activity>
         <activity
             android:name=".FullStory"
-            android:label="@string/title_activity_full_story"></activity>
+            android:label="@string/title_activity_full_story"
+            android:parentActivityName=".MainActivity"/>
     </application>
 
 </manifest>

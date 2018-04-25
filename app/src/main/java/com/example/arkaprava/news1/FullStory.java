@@ -1,48 +1,75 @@
 package com.example.arkaprava.news1;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.webkit.WebSettings;
+import android.webkit.WebChromeClient;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.TextView;
+import android.widget.ProgressBar;
 
 public class FullStory extends AppCompatActivity {
 
-    private WebView mwebView;
-
+    private WebView webView;
+    ProgressDialog progressDialog;
+    String url="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_full_story);
-
-        mwebView = (WebView) findViewById(R.id.fullstory);
+        progressDialog=new ProgressDialog(FullStory.this);
+        progressDialog.setCancelable(false);
+        progressDialog.setMessage(getResources().getString(R.string.loadingMessage));
+        webView = findViewById(R.id.fullstory);
         Bundle bundle=getIntent().getExtras();
         if(bundle!=null)
         {
-            String url=bundle.getString("link");
-            WebSettings webSettings = mwebView.getSettings();
-            //improve webView performance
-            mwebView.getSettings().setRenderPriority(WebSettings.RenderPriority.HIGH);
-            mwebView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
-            mwebView.getSettings().setAppCacheEnabled(true);
-            mwebView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
-            webSettings.setDomStorageEnabled(true);
-            webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
-            webSettings.setUseWideViewPort(true);
-            webSettings.setSavePassword(true);
-            webSettings.setSaveFormData(true);
-            webSettings.setEnableSmoothTransition(true);
+            url=bundle.getString("link");
+            webView.setWebViewClient(new webViewClient());
+            webView.getSettings().setJavaScriptEnabled(true);
+            webView.loadUrl(url);
+            setTitle(url);
+        }
+    }
+    public class webViewClient extends WebViewClient{
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            view.loadUrl(url);
+            return true;
+        }
 
+        @Override
+        public void onPageStarted(WebView view, String url, Bitmap favicon) {
+            progressDialog.show();
+        }
 
-            mwebView.loadUrl(url);
-            //force links open in webview only
-            mwebView.setWebViewClient(new WebViewClient());
+        @Override
+        public void onPageFinished(WebView view, String url) {
+            progressDialog.dismiss();
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.open_chrome,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.openChrome:
+                Intent intent=new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(url));
+                startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
