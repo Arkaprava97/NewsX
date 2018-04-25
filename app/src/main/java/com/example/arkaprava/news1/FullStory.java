@@ -1,5 +1,6 @@
 package com.example.arkaprava.news1;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -14,12 +15,14 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 public class FullStory extends AppCompatActivity {
 
     private WebView webView;
     ProgressDialog progressDialog;
     String url="";
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +72,11 @@ public class FullStory extends AppCompatActivity {
             case R.id.openChrome:
                 Intent intent=new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse(url));
+                if(url.equals("")){
+                    Toast.makeText(getApplicationContext(),
+                            getResources().getString(R.string.ErrorMsg),
+                            Toast.LENGTH_SHORT).show();
+                }
                 startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
