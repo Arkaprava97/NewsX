@@ -48,6 +48,7 @@ public class FullStory extends AppCompatActivity {
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             progressDialog.show();
+            progressDialog.setCancelable(false);
         }
 
         @Override
