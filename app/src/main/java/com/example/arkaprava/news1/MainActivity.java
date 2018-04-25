@@ -38,15 +38,6 @@ public class MainActivity extends AppCompatActivity implements HttpConnector.Res
         HttpConnector httpConnector;
         httpConnector = new HttpConnector(getApplicationContext(), url, this);
         httpConnector.makeQuery();
-       /* articleListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                //Article currentArticle= new Article();
-                Intent intent=new Intent(MainActivity.this,FullStory.class);
-                intent.putExtra("Link",articleListview.getItemAtPosition(i).toString());
-                startActivity(intent);
-            }
-        });*/
     }
 
     @Override
