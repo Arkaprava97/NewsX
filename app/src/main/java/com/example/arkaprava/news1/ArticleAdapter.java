@@ -9,9 +9,6 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import static android.support.v4.content.ContextCompat.startActivity;
 
 public class ArticleAdapter extends ArrayAdapter<Article> {
 
