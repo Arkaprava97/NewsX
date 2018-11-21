@@ -1,19 +1,20 @@
 package com.example.arkaprava.news1;
 
 import android.app.ProgressDialog;
-import android.support.design.widget.NavigationView;
-import android.support.v7.app.ActionBar;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
-import android.support.v7.widget.Toolbar;
+import android.widget.TextView;
 
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-
-import static com.example.arkaprava.news1.R.drawable.ic_menu_black_24px;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements HttpConnector.ResponseListener {
 
@@ -21,7 +22,6 @@ public class MainActivity extends AppCompatActivity implements HttpConnector.Res
     ListView articleListview;
     ProgressDialog progressDialog;
     ArticleAdapter articleAdapter;
-    //NavigationView navigationView;
     String url = "https://newsapi.org/v2/top-headlines?sources=al-jazeera-english&apiKey=" + API_KEY;
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -29,17 +29,12 @@ public class MainActivity extends AppCompatActivity implements HttpConnector.Res
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        articleListview =findViewById(R.id.Storylist);
+        articleListview = (ListView) findViewById(R.id.Storylist);
         progressDialog = new ProgressDialog(MainActivity.this);
         progressDialog.setMessage("Loading...");
         progressDialog.setCancelable(false);
         progressDialog.show();
-        //navigationView=findViewById(R.id.nav_view);
-        //Toolbar toolbar = findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
-        android.support.v7.app.ActionBar actionbar = getSupportActionBar();
-        actionbar.setDisplayHomeAsUpEnabled(true);
-        actionbar.setHomeAsUpIndicator(ic_menu_black_24px);
+        TextView emptyView = (TextView) findViewById(R.id.empty);
         HttpConnector httpConnector;
         httpConnector = new HttpConnector(getApplicationContext(), url, this);
         httpConnector.makeQuery();
@@ -57,5 +52,7 @@ public class MainActivity extends AppCompatActivity implements HttpConnector.Res
         final ArrayList<Article> articleList = queryUtils.extractFeaturesFromJSON();
         articleAdapter = new ArticleAdapter(this, articleList);
         articleListview.setAdapter(articleAdapter);
+        //articleAdapter.notifyDataSetChanged();
     }
+   // public  void
 }
