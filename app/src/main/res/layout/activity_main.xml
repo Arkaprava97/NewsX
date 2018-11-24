@@ -3,17 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingTop="4dp"
+    android:background="@color/White"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp">
 
     <ListView
         android:id="@+id/Storylist"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:scrollbars="vertical" />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/empty"
-        android:text="Nothing to show."/>
+        android:scrollbars="vertical"
+       />
 </LinearLayout>

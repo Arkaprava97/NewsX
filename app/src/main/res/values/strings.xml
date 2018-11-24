@@ -1,10 +1,11 @@
 <resources>
-    <string name="app_name">News1</string>
+    <string name="app_name">NewsX</string>
     <string name="title_activity_full_story">FullStory</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="loadingMessage">Loading the full story</string>
     <string name="openChrome">Open in Chrome</string>
-    <string name="ErrorMsg">Ops, Every one has a bad day!</string>
+    <string name="ErrorMsg">Oops, Every one has a bad day!</string>
+    <string name="Err">Oops ! \n Move to an area with better coverage or try connectiong to a Wi-fi network</string>
 </resources>
